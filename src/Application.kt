@@ -7,7 +7,7 @@ import io.ktor.jackson.jackson
 import io.ktor.response.*
 import io.ktor.request.*
 import io.ktor.routing.routing
-import io.project.controller.testRoutes
+import io.project.route.moduleRoute
 
 fun main(args: Array<String>): Unit = io.ktor.server.tomcat.EngineMain.main(args)
 
@@ -22,6 +22,6 @@ fun Application.module(testing: Boolean = false) {
     }
 
     routing {
-        testRoutes()
+        moduleRoute()
     }
 }
