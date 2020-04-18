@@ -6,12 +6,9 @@ import io.ktor.response.respond
 import io.ktor.routing.Route
 import io.ktor.routing.get
 import io.ktor.routing.route
-import io.project.model.Module
 import io.project.service.ModuleService
 
-val moduleService = ModuleService()
-
-fun Route.moduleRoute() {
+fun Route.moduleRoute(moduleService: ModuleService) {
 
     route("/module") {
         get("/{name}") {
@@ -23,6 +20,9 @@ fun Route.moduleRoute() {
         }
 
         get("/{fieldOfStudy}/{semester}") {
+            if (call.parameters["semester"]!!.toIntOrNull() == null) {
+                call.respond(HttpStatusCode.BadRequest, "Semestr powinien być liczbą")
+            }
             call.respond(
                 HttpStatusCode.OK, moduleService.getByFieldOfStudyAndSemester(
                     call.parameters["fieldOfStudy"]!!, call.parameters["semester"]!!

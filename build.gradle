@@ -34,4 +34,11 @@ dependencies {
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
 
     compile "io.ktor:ktor-jackson:$ktor_version"
+    compile 'org.litote.kmongo:kmongo:4.0.0'
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
