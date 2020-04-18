@@ -37,7 +37,11 @@ class ModuleService {
         return db
     }
 
-    fun getByFieldOfStudyAndSemester(fieldOfStudy: String, semester: Int): List<Module> {
-        return db.filter { module -> module.fieldOfStudy == fieldOfStudy && module.semester == semester }
+    fun getByFieldOfStudyAndSemester(fieldOfStudy: String, semester: String): List<Module> {
+        return try {
+            db.filter { module -> module.fieldOfStudy == fieldOfStudy && module.semester == semester.toInt() }
+        } catch (e: NumberFormatException) {
+            emptyList()
+        }
     }
 }

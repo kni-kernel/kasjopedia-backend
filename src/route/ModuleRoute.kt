@@ -23,15 +23,11 @@ fun Route.moduleRoute() {
         }
 
         get("/{fieldOfStudy}/{semester}") {
-            try {
-                call.respond(
-                    HttpStatusCode.OK, moduleService.getByFieldOfStudyAndSemester(
-                        call.parameters["fieldOfStudy"]!!, call.parameters["semester"]!!.toInt()
-                    )
+            call.respond(
+                HttpStatusCode.OK, moduleService.getByFieldOfStudyAndSemester(
+                    call.parameters["fieldOfStudy"]!!, call.parameters["semester"]!!
                 )
-            } catch (e: NumberFormatException) {
-                call.respond(HttpStatusCode.NotFound, emptyList<Module>())
-            }
+            )
         }
     }
 }
