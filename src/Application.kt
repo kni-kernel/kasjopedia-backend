@@ -7,7 +7,9 @@ import io.ktor.jackson.jackson
 import io.ktor.response.*
 import io.ktor.request.*
 import io.ktor.routing.routing
+import io.project.dao.mongodb.MongoDbDao
 import io.project.route.moduleRoute
+import io.project.service.ModuleService
 
 fun main(args: Array<String>): Unit = io.ktor.server.tomcat.EngineMain.main(args)
 
@@ -22,6 +24,6 @@ fun Application.module(testing: Boolean = false) {
     }
 
     routing {
-        moduleRoute()
+        moduleRoute(ModuleService(MongoDbDao()))
     }
 }
