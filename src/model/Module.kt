@@ -6,6 +6,6 @@ data class Module(
     val name: String,
     val ects: Int,
     val fieldOfStudy: String,
-    val semester: Int = 0,
-    val hours: HashMap<String, Int> = HashMap<String, Int>()
+    val semester: Int,
+    val hours: HashMap<String, Int>
 ) : Serializable
