@@ -7,9 +7,12 @@ import io.ktor.jackson.jackson
 import io.ktor.response.*
 import io.ktor.request.*
 import io.ktor.routing.routing
+import io.project.connector.HttpConnector
+import io.project.connector.PdfConnector
 import io.project.dao.mongodb.MongoDbDao
 import io.project.route.moduleRoute
 import io.project.service.ModuleService
+import io.project.service.PdfService
 
 fun main(args: Array<String>): Unit = io.ktor.server.tomcat.EngineMain.main(args)
 
@@ -24,6 +27,6 @@ fun Application.module(testing: Boolean = false) {
     }
 
     routing {
-        moduleRoute(ModuleService(MongoDbDao()))
+        moduleRoute(ModuleService(MongoDbDao()), PdfService(HttpConnector()))
     }
 }
