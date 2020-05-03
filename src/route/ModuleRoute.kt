@@ -2,13 +2,16 @@ package io.project.route
 
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
+import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.Route
 import io.ktor.routing.get
+import io.ktor.routing.post
 import io.ktor.routing.route
+import io.project.service.PdfService
 import io.project.service.ModuleService
 
-fun Route.moduleRoute(moduleService: ModuleService) {
+fun Route.moduleRoute(moduleService: ModuleService, pdfService: PdfService) {
 
     route("/module") {
         get("/{name}") {
@@ -30,4 +33,13 @@ fun Route.moduleRoute(moduleService: ModuleService) {
             )
         }
     }
+
+    route("/form") {
+        post {
+            val post = call.receive<String>()
+            val generatedPdf = pdfService.generatePdf(post)
+            call.respond(HttpStatusCode.OK, generatedPdf)
+        }
+    }
+
 }
