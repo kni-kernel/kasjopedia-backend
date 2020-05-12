@@ -1,17 +1,17 @@
 syntax = 'proto3';
-package io.project.proto;
+package spzgenerator;
 
 option java_package = "io.project.proto";
 option java_multiple_files = true;
 
-message Request {
-  string data = 1;
+service SpzGeneratorService {
+  rpc GenerateSpz (GenerateSpzRequest) returns (GeneratedSpzResponse) {}
 }
 
-message GeneratedPdf {
-  string pdf = 1;
+message GenerateSpzRequest {
+  string content = 1;
 }
 
-service PdfConnector {
-  rpc GetGeneratedPdf(Request) returns (GeneratedPdf) {}
+message GeneratedSpzResponse {
+  bytes blob = 1;
 }

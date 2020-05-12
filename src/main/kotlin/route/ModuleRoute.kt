@@ -37,8 +37,7 @@ fun Route.moduleRoute(moduleService: ModuleService, pdfService: GrpcClient) {
     route("/form") {
         post {
             val post = call.receive<String>()
-            val generatedPdf = pdfService.sendRequest(post)
-            call.respond(HttpStatusCode.OK, generatedPdf)
+            call.respond(HttpStatusCode.OK, pdfService.sendRequest(post).blob.toByteArray())
         }
     }
 
