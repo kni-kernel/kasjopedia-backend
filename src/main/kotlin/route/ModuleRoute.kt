@@ -8,10 +8,10 @@ import io.ktor.routing.Route
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.route
-import io.project.service.PdfService
+import io.project.connector.GrpcClient
 import io.project.service.ModuleService
 
-fun Route.moduleRoute(moduleService: ModuleService, pdfService: PdfService) {
+fun Route.moduleRoute(moduleService: ModuleService, pdfService: GrpcClient) {
 
     route("/module") {
         get("/{name}") {
@@ -37,8 +37,7 @@ fun Route.moduleRoute(moduleService: ModuleService, pdfService: PdfService) {
     route("/form") {
         post {
             val post = call.receive<String>()
-            val generatedPdf = pdfService.generatePdf(post)
-            call.respond(HttpStatusCode.OK, generatedPdf)
+            call.respond(HttpStatusCode.OK, pdfService.sendRequest(post).blob.toByteArray())
         }
     }
 
