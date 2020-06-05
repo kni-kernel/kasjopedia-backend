@@ -4,8 +4,11 @@ import io.project.dao.DbDao
 import io.project.model.Module
 import org.litote.kmongo.*
 
-class MongoDbDao : DbDao {
-    private val collection = KMongo.createClient().getDatabase("KasjopejaDB").getCollection<Module>("wfiis")
+class MongoDbDao constructor(
+    private val mongoHostName: String
+) : DbDao {
+    private val collection =
+        KMongo.createClient("mongodb://${mongoHostName}").getDatabase("KasjopejaDB").getCollection<Module>("wfiis")
 
     override fun getByName(name: String): Module? {
         return collection.findOne(Module::name eq name)

@@ -1,0 +1,6 @@
+.github
+.gradle
+.idea
+build
+.git
+tomcat.8080
