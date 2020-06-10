@@ -8,6 +8,13 @@ interface DbDao {
 
     fun getAll(): MutableList<Module>
 
-    fun getByFieldOfStudyAndSemester(fieldOfStudy: String, semester: Int): List<Module>
+    fun getByFoSStartYearDegreeAndSemester(
+        fieldOfStudy: String,
+        startYear: Int,
+        level: Int,
+        semester: Int
+    ): List<Module>
+
+    fun getElectiveSubjects(): List<Module>
 
 }
