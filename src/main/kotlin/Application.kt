@@ -45,7 +45,12 @@ fun Application.module() {
 
     routing {
         moduleRoute(
-            ModuleService(MongoDbDao(environment.config.property("ktor.deployment.mongoHost").getString())),
+            ModuleService(
+                MongoDbDao(
+                    environment.config.property("ktor.deployment.mongoHost").getString(),
+                    "KasjopejaDB"
+                )
+            ),
             GrpcClient(
                 ManagedChannelBuilder.forAddress(
                     environment.config.property("ktor.deployment.grpcName").getString(),

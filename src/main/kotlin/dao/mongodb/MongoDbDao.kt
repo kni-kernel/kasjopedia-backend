@@ -5,10 +5,11 @@ import io.project.model.Module
 import org.litote.kmongo.*
 
 class MongoDbDao constructor(
-    private val mongoHostName: String
+    mongoHostName: String,
+    dbName: String
 ) : DbDao {
     private val collection =
-        KMongo.createClient("mongodb://${mongoHostName}").getDatabase("KasjopejaDB").getCollection<Module>("wfiis")
+        KMongo.createClient("mongodb://${mongoHostName}").getDatabase(dbName).getCollection<Module>("wfiis")
 
     override fun getByName(name: String): Module? {
         return collection.findOne(Module::name eq name)
@@ -41,6 +42,14 @@ class MongoDbDao constructor(
         val data = mutableListOf<Module>()
         collection.find(Module::semester eq 0).into(data)
         return data
+    }
+
+    fun insertDocuments(moduleList: List<Module>) {
+        collection.insertMany(moduleList);
+    }
+
+    fun clearDb() {
+        collection.deleteMany("{}")
     }
 
 }
