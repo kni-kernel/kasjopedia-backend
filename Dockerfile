@@ -3,7 +3,7 @@ ENV WORKDIR="/kasj"
 
 WORKDIR ${WORKDIR}
 COPY .  ${WORKDIR}/
-RUN ./gradlew build --no-daemon
+RUN ./gradlew build --no-daemon -x test
 
 FROM openjdk:14
 ENV WORKDIR="/kasj"
