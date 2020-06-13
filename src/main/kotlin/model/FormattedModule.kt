@@ -27,11 +27,11 @@ data class FormattedModule(
     }
 
     private fun mapHours(hours: HashMap<String, Int>): String {
-        return "" + hours["wykład"] + "/" +
-                hours["ćwiczenia audytoryjne"] + "/" +
-                hours["ćwiczenia laboratoryjne"] + "/" +
-                hours["ćwiczenia projektowe"] + "/" +
-                hours["zajęcia seminaryjne"] + "/" +
-                hours["inne"]
+        return "" + hours.getOrDefault("wykład", 0) + "/" +
+                hours.getOrDefault("ćwiczenia audytoryjne", 0) + "/" +
+                hours.getOrDefault("ćwiczenia laboratoryjne", 0) + "/" +
+                hours.getOrDefault("ćwiczenia projektowe", 0) + "/" +
+                hours.getOrDefault("zajęcia seminaryjne", 0) + "/" +
+                hours.getOrDefault("inne", 0)
     }
 }
