@@ -47,7 +47,7 @@ class MongoDbDao constructor(
         val data = mutableListOf<Module>()
         collection.find(
             Module::fieldOfStudy eq fieldOfStudy,
-            Module::semester lte semester,
+            Module::semester lt semester,
             Module::level eq level,
             Module::academicYear eq "$startYear/${startYear + 1}"
         )
