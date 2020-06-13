@@ -48,6 +48,7 @@ class MongoDbDao constructor(
         collection.find(
             Module::fieldOfStudy eq fieldOfStudy,
             Module::semester lt semester,
+            Module::semester gt 0,
             Module::level eq level,
             Module::academicYear eq "$startYear/${startYear + 1}"
         )
