@@ -37,7 +37,7 @@ class ModuleService(private val dao: DbDao) {
         ).map { module -> FormattedModule(module) }
     }
 
-    fun getElectiveSubjects(): List<FormattedModule> {
-        return dao.getElectiveSubjects().map { module -> FormattedModule(module) }
+    fun getElectiveSubjects(startYear: String): List<FormattedModule> {
+        return dao.getElectiveSubjects(startYear.toInt()).map { module -> FormattedModule(module) }
     }
 }

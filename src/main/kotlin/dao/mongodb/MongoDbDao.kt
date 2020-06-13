@@ -56,9 +56,9 @@ class MongoDbDao constructor(
         return data
     }
 
-    override fun getElectiveSubjects(): List<Module> {
+    override fun getElectiveSubjects(startYear: Int): List<Module> {
         val data = mutableListOf<Module>()
-        collection.find(Module::semester eq 0).into(data)
+        collection.find(Module::semester eq 0, Module::academicYear eq "$startYear/${startYear + 1}").into(data)
         return data
     }
 

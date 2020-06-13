@@ -22,6 +22,6 @@ interface DbDao {
         semester: Int
     ): List<Module>
 
-    fun getElectiveSubjects(): List<Module>
+    fun getElectiveSubjects(startYear: Int): List<Module>
 
 }

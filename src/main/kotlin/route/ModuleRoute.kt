@@ -50,10 +50,12 @@ fun Route.moduleRoute(moduleService: ModuleService, pdfService: GrpcClient) {
             )
         }
 
-        get("/elective") {
+        get("/elective/{startYear}") {
+            if (call.parameters["startYear"]!!.toIntOrNull() == null)
+                call.respond(HttpStatusCode.BadRequest, "Rok rozpoczęcia powinien być liczbą")
             call.respond(
                 HttpStatusCode.OK,
-                moduleService.getElectiveSubjects()
+                moduleService.getElectiveSubjects(call.parameters["startYear"]!!)
             )
         }
     }
