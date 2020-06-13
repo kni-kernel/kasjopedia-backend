@@ -1,16 +1,16 @@
 package io.project.service
 
 import io.project.dao.DbDao
-import io.project.model.Module
+import io.project.model.FormattedModule
 
 class ModuleService(private val dao: DbDao) {
 
-    fun getByName(name: String): Module? {
-        return dao.getByName(name.replace("_", " "))
+    fun getByName(name: String): FormattedModule? {
+        return dao.getByName(name.replace("_", " "))?.let { FormattedModule(it) }
     }
 
-    fun getAll(): MutableList<Module> {
-        return dao.getAll()
+    fun getAll(): List<FormattedModule> {
+        return dao.getAll().map { module -> FormattedModule(module) }
     }
 
     fun getByFoSStartYearDegreeAndSemester(
@@ -18,8 +18,9 @@ class ModuleService(private val dao: DbDao) {
         startYear: String,
         level: String,
         semester: String
-    ): List<Module> {
+    ): List<FormattedModule> {
         return dao.getByFoSStartYearDegreeAndSemester(fieldOfStudy, startYear.toInt(), level.toInt(), semester.toInt())
+            .map { module -> FormattedModule(module) }
     }
 
     fun getByFoSStartYearDegreeAndSemesterPlusPrevSemesters(
@@ -27,16 +28,16 @@ class ModuleService(private val dao: DbDao) {
         startYear: String,
         level: String,
         semester: String
-    ): List<Module> {
+    ): List<FormattedModule> {
         return dao.getByFoSStartYearDegreeAndSemesterPlusPrevSemesters(
             fieldOfStudy,
             startYear.toInt(),
             level.toInt(),
             semester.toInt()
-        )
+        ).map { module -> FormattedModule(module) }
     }
 
-    fun getElectiveSubjects(): List<Module> {
-        return dao.getElectiveSubjects()
+    fun getElectiveSubjects(): List<FormattedModule> {
+        return dao.getElectiveSubjects().map { module -> FormattedModule(module) }
     }
 }
