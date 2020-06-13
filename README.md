@@ -13,9 +13,10 @@ APP_CORS_HOSTS  |CORS hosts
 
 ## Endpoints
 
-Endpoint          | Description
-------------------|-----------
-/module           |Returns all data from db
-/module/`{name}`  |Returns module for given name
-/module/elective  |Returns all elective modules
-/module/`{fieldOfStudy}`/`{startYear}`/`{level}`/`{semester}`|Returns all modules matching parameters
+Endpoint          |Method| Description
+------------------|------|-----------
+/module           |GET   |Returns all data from db
+/module/`{name}`  |GET   |Returns module for given name
+/module/elective  |GET   |Returns all elective modules
+/module/`{fieldOfStudy}`/`{startYear}`/`{level}`/`{semester}`|GET|Returns all modules matching parameters
+/form             |POST  |Returns created pdf from post parameter
