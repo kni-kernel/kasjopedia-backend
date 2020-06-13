@@ -36,6 +36,20 @@ fun Route.moduleRoute(moduleService: ModuleService, pdfService: GrpcClient) {
             )
         }
 
+        get("prev/{fieldOfStudy}/{startYear}/{level}/{semester}") {
+            if (call.parameters["semester"]!!.toIntOrNull() == null || call.parameters["startYear"]!!.toIntOrNull() == null || call.parameters["level"]!!.toIntOrNull() == null) {
+                call.respond(HttpStatusCode.BadRequest, "Semestr, rok rozpoczęcia i stopień powinny być liczbą")
+            }
+            call.respond(
+                HttpStatusCode.OK, moduleService.getByFoSStartYearDegreeAndSemesterPlusPrevSemesters(
+                    call.parameters["fieldOfStudy"]!!,
+                    call.parameters["startYear"]!!,
+                    call.parameters["level"]!!,
+                    call.parameters["semester"]!!
+                )
+            )
+        }
+
         get("/elective") {
             call.respond(
                 HttpStatusCode.OK,

@@ -3,6 +3,7 @@ package io.project.model
 import java.io.Serializable
 
 data class Module(
+    val _id: Int,
     val name: String,
     val ects: Int,
     val academicYear: String,

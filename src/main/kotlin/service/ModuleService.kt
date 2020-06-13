@@ -22,6 +22,20 @@ class ModuleService(private val dao: DbDao) {
         return dao.getByFoSStartYearDegreeAndSemester(fieldOfStudy, startYear.toInt(), level.toInt(), semester.toInt())
     }
 
+    fun getByFoSStartYearDegreeAndSemesterPlusPrevSemesters(
+        fieldOfStudy: String,
+        startYear: String,
+        level: String,
+        semester: String
+    ): List<Module> {
+        return dao.getByFoSStartYearDegreeAndSemesterPlusPrevSemesters(
+            fieldOfStudy,
+            startYear.toInt(),
+            level.toInt(),
+            semester.toInt()
+        )
+    }
+
     fun getElectiveSubjects(): List<Module> {
         return dao.getElectiveSubjects()
     }

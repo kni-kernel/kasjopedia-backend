@@ -38,6 +38,23 @@ class MongoDbDao constructor(
         return data
     }
 
+    override fun getByFoSStartYearDegreeAndSemesterPlusPrevSemesters(
+        fieldOfStudy: String,
+        startYear: Int,
+        level: Int,
+        semester: Int
+    ): List<Module> {
+        val data = mutableListOf<Module>()
+        collection.find(
+            Module::fieldOfStudy eq fieldOfStudy,
+            Module::semester lte semester,
+            Module::level eq level,
+            Module::academicYear eq "$startYear/${startYear + 1}"
+        )
+            .into(data)
+        return data
+    }
+
     override fun getElectiveSubjects(): List<Module> {
         val data = mutableListOf<Module>()
         collection.find(Module::semester eq 0).into(data)

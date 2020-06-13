@@ -15,6 +15,13 @@ interface DbDao {
         semester: Int
     ): List<Module>
 
+    fun getByFoSStartYearDegreeAndSemesterPlusPrevSemesters(
+        fieldOfStudy: String,
+        startYear: Int,
+        level: Int,
+        semester: Int
+    ): List<Module>
+
     fun getElectiveSubjects(): List<Module>
 
 }
