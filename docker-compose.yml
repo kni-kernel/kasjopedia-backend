@@ -1,6 +1,10 @@
 version: '3.3'
 
 services:
+  kasj-front:
+    image: knikernel/kasjopeja-frontend
+    ports:
+      - 80:80
   kasj-pdf:
     image: knikernel/kasjopeja-pdf
     ports:
